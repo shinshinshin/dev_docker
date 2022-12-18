@@ -1,41 +1,45 @@
 version: '3.8'
 services:
-#  mysql:
-#    image: mysql
-#    container_name: mysql-debian
-#    ports:
-#      - "33306:3306"
-#    environment:
-#      MYSQL_ROOT_PASSWORD: "password"
-#    #restart: always
-#    volumes:
-#      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
-#    tty: true
-#    stdin_open: true
-#  back:
-#    container_name: plus-back
-#    build:
-#      context: ./back
-#      dockerfile: Dockerfile
-#    ports:
-#    - "50000:8000"
-#    #restart: always
-#    tty: true
-#    stdin_open: true
-#    volumes:
-#      - type: bind
-#        source: ./back/plus_back/
-#        target: /var/plus_back/
-#  socket:
-#    image: node:16-alpine
-#    container_name: plus-socket
-#    ports:
-#    - "50001:8080"
-#    #restart: always
-#    tty: true
-#    stdin_open: true
-#    volumes:
-#      - ./socket/plus_socket:/var/plus_socket
+  mysql:
+    image: mysql
+    container_name: mysql-debian
+    ports:
+      - "33306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+    #restart: always
+    volumes:
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+    tty: true
+    stdin_open: true
+  back:
+    container_name: plus-back
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    ports:
+    - "50000:8000"
+    #restart: always
+    tty: true
+    stdin_open: true
+    volumes:
+      - type: bind
+        source: ./back/plus_back/
+        target: /var/plus_back/
+  socket:
+    container_name: plus-socket
+    build:
+      context: ./socket
+      dockerfile: Dockerfile
+    ports:
+    - "50001:8080"
+    #restart: always
+    tty: true
+    stdin_open: true
+    volumes:
+      - type: bind
+        source: ./socket/plus_socket/
+        target: /var/plus_socket/
   clinic:
     container_name: plus-clinic
     build:

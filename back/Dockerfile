@@ -1,7 +1,8 @@
 FROM node:16-alpine
+COPY plus_back/ /var/plus_back/
 WORKDIR /var/plus_back
 RUN apk update &&\
     npm install -g npm
 RUN npm install
 EXPOSE 8000
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "nodemon"]
