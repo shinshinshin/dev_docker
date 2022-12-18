@@ -50,18 +50,6 @@ services:
       - type: bind
         source: ./clinic/plus_clinic/
         target: /var/plus_clinic/
-    mem_limit: 32g
-#  test:
-#    build:
-#      context: .
-#      dockerfile: ./test/Dockerfile
-#    container_name: dev-test
-#    tty: true
-#    stdin_open: true
-#    volumes:
-#      - type: bind
-#        source: ./test/test.txt
-#        target: /var/test/test.txt
 #  net:
 #    image: node:16-alpine
 #    container_name: plus-net

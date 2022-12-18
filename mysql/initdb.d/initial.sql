@@ -10,3 +10,6 @@ CREATE TABLE IF NOT EXISTS sample_table
 
 INSERT INTO sample_table (sample) VALUES ("sample1");
 INSERT INTO sample_table (sample) VALUES ("sample2");
+
+CREATE USER `system`@`%` IDENTIFIED BY 'password';
+GRANT ALL ON *.* TO `system`@`%`;
