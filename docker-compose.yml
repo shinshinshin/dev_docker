@@ -17,6 +17,7 @@ services:
       - app-net
   back:
     container_name: plus-back
+    hostname: plus-back
     build:
       context: ./back
       dockerfile: Dockerfile
@@ -35,6 +36,7 @@ services:
       - app-net
   socket:
     container_name: plus-socket
+    hostname: plus-socket
     build:
       context: ./socket
       dockerfile: Dockerfile
@@ -51,6 +53,7 @@ services:
       - app-net
   clinic:
     container_name: plus-clinic
+    hostname: plus-clinic
     build:
       context: ./clinic
       dockerfile: Dockerfile
