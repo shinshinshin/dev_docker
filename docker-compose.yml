@@ -3,6 +3,7 @@ services:
   mysql:
     image: mysql
     container_name: mysql-debian
+    hostname: db
     ports:
       - "33306:3306"
     environment:
@@ -12,6 +13,8 @@ services:
       - ./mysql/initdb.d:/docker-entrypoint-initdb.d
     tty: true
     stdin_open: true
+    networks:
+      - app-net
   back:
     container_name: plus-back
     build:
@@ -26,6 +29,10 @@ services:
       - type: bind
         source: ./back/plus_back/
         target: /var/plus_back/
+    depends_on:
+      - mysql
+    networks:
+      - app-net
   socket:
     container_name: plus-socket
     build:
@@ -40,6 +47,8 @@ services:
       - type: bind
         source: ./socket/plus_socket/
         target: /var/plus_socket/
+    networks:
+      - app-net
   clinic:
     container_name: plus-clinic
     build:
@@ -54,6 +63,8 @@ services:
       - type: bind
         source: ./clinic/plus_clinic/
         target: /var/plus_clinic/
+    networks:
+      - app-net
 #  net:
 #    image: node:16-alpine
 #    container_name: plus-net
@@ -64,3 +75,6 @@ services:
 #    stdin_open: true
 #    volumes:
 #      - ./net/plus_net:/var/plus_net
+networks:
+  app-net:
+    driver: bridge
