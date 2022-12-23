@@ -15,10 +15,10 @@ services:
     stdin_open: true
     networks:
       - app-net
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 10
+    #healthcheck:
+    #  test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+    #  timeout: 20s
+    #  retries: 10
   back:
     container_name: plus-back
     hostname: plus-back
@@ -34,9 +34,11 @@ services:
       - type: bind
         source: ./back/plus_back/
         target: /var/plus_back/
-    depends_on:
-      mysql:
-        condition: service_healthy
+    environment:
+      CHOKIDAR_USEPOLLING: 1
+    #depends_on:
+    #  mysql:
+    #    condition: service_healthy
     networks:
       - app-net
   socket:
